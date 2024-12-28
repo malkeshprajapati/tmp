@@ -91,4 +91,4 @@ app.get("/kudos/all", async (req, res) => {
   res.send(kudos);
 });
 
-app.listen(5000, () => {});
+app.listen(process.env.PORT, () => {});
