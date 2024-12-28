@@ -91,4 +91,4 @@ app.get("/kudos/all", async (req, res) => {
   res.send(kudos);
 });
 
-app.listen("https://tmp-rouge.vercel.app/" || 5000, () => {});
+app.listen(5000, () => {});
