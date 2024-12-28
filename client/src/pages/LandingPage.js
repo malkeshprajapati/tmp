@@ -15,7 +15,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/kudos/all")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}kudos/all`)
       .then((response) => response.json())
       .then((data) => setKudos(data));
   }, []);

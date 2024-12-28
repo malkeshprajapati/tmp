@@ -17,7 +17,7 @@ const WelcomePage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/user/exists?username=${username}`
+        `${process.env.REACT_APP_API_BASE_URL}user/exists?username=${username}`
       );
       const data = await response.json();
 

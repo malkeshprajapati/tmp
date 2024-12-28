@@ -53,7 +53,7 @@ const Analytics = () => {
     const username = localStorage.getItem("username");
 
     if (username) {
-      fetch("http://localhost:5000/kudos/all")
+      fetch(`${process.env.REACT_APP_API_BASE_URL}kudos/all`)
         .then((response) => response.json())
         .then((kudos) => {
           const userKudos = kudos.filter((kudo) => kudo.recipient === username);
@@ -80,7 +80,7 @@ const Analytics = () => {
           });
         });
     }
-    fetch("http://localhost:5000/user/all")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}user/all`)
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);

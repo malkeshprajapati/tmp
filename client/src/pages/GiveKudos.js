@@ -26,7 +26,7 @@ const GiveKudos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/kudos", {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}kudos`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sender, recipient, message, reason }),
@@ -36,7 +36,7 @@ const GiveKudos = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/user/all")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}user/all`)
       .then((response) => response.json())
       .then((data) => {
         const filteredUsers = data.filter((user) => user.name !== sender);
