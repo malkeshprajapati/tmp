@@ -1,17 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-require("dotenv").config();
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((error) => console.error("MongoDB connection error:", error));
 
 const UserSchema = new mongoose.Schema({
   email: String,
@@ -38,8 +41,13 @@ app.post("/user", async (req, res) => {
 });
 
 app.get("/user/all", async (req, res) => {
-  const user = await User.find();
-  res.send(user);
+  try {
+    const users = await User.find();
+    res.send(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Error fetching users" });
+  }
 });
 
 app.get("/user/exists", async (req, res) => {
@@ -74,7 +82,6 @@ app.post("/kudos", async (req, res) => {
     }
 
     recipientUser.kudosCount += 1;
-
     await recipientUser.save();
 
     const kudos = new Kudos({ sender, recipient, message, reason });
@@ -87,8 +94,15 @@ app.post("/kudos", async (req, res) => {
 });
 
 app.get("/kudos/all", async (req, res) => {
-  const kudos = await Kudos.find();
-  res.send(kudos);
+  try {
+    const kudos = await Kudos.find();
+    res.send(kudos);
+  } catch (error) {
+    console.error("Error fetching kudos:", error);
+    res.status(500).send({ message: "Error fetching kudos" });
+  }
 });
 
-app.listen(process.env.PORT, () => {});
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+});
