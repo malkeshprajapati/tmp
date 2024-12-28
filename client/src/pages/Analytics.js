@@ -53,7 +53,7 @@ const Analytics = () => {
     const username = localStorage.getItem("username");
 
     if (username) {
-      fetch("https://tmp-rouge.vercel.app/kudos/all")
+      fetch("http://localhost:5000/kudos/all")
         .then((response) => response.json())
         .then((kudos) => {
           const userKudos = kudos.filter((kudo) => kudo.recipient === username);
@@ -80,7 +80,7 @@ const Analytics = () => {
           });
         });
     }
-    fetch("https://tmp-rouge.vercel.app/user/all")
+    fetch("http://localhost:5000/user/all")
       .then((response) => response.json())
       .then((data) => setUsers(data));
   }, []);

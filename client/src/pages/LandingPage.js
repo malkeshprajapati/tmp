@@ -15,7 +15,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://tmp-rouge.vercel.app/kudos/all")
+    fetch("http://localhost:5000/kudos/all")
       .then((response) => response.json())
       .then((data) => setKudos(data));
   }, []);

@@ -26,7 +26,7 @@ const GiveKudos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://tmp-rouge.vercel.app/kudos", {
+    fetch("http://localhost:5000/kudos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sender, recipient, message, reason }),
@@ -36,7 +36,7 @@ const GiveKudos = () => {
   };
 
   useEffect(() => {
-    fetch("https://tmp-rouge.vercel.app/user/all")
+    fetch("http://localhost:5000/user/all")
       .then((response) => response.json())
       .then((data) => {
         const filteredUsers = data.filter((user) => user.name !== sender);

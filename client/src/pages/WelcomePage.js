@@ -17,7 +17,7 @@ const WelcomePage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://tmp-rouge.vercel.app/user/exists?username=${username}`
+        `http://localhost:5000/user/exists?username=${username}`
       );
       const data = await response.json();
 
